@@ -14,8 +14,8 @@
 
       function initialize() {
         var myOptions = {
-          center: new google.maps.LatLng(-33.9, 151.2),
-          zoom: 10,
+          center: new google.maps.LatLng(<%= @lat %>,<%= @lon %>),
+          zoom: 13,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
@@ -23,14 +23,15 @@
       }
 
       var beaches = <%= @pins %>;
-      
       function setMarkers(map, locations) {
         for (var i = 0; i < locations.length; i++) {
             var beach = locations[i];
             var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+            var image = 'img/'+beach[3]+'.gif';
             var marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map,
+                icon: image,
                 title: beach[0],
             });
         }
