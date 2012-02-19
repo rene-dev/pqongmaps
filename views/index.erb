@@ -11,7 +11,6 @@
       src="http://maps.googleapis.com/maps/api/js?key=<%= @apikey %>&sensor=false">
     </script>
     <script type="text/javascript">
-
       function initialize() {
         var myOptions = {
           center: new google.maps.LatLng(<%= @lat %>,<%= @lon %>),
@@ -19,20 +18,24 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
-        setMarkers(map,beaches);
-      }
-
-      var beaches = <%= @pins %>;
-      function setMarkers(map, locations) {
-        for (var i = 0; i < locations.length; i++) {
-            var beach = locations[i];
-            var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
-            var image = 'img/'+beach[3]+'.gif';
-            var marker = new google.maps.Marker({
+        var infowindow = new google.maps.InfoWindow();
+        var marker,i;
+        var markers = <%= @pins %>;
+        for (i = 0; i < markers.length; i++) {
+            var pin = markers[i];
+            var myLatLng = new google.maps.LatLng(pin[1], pin[2]);
+            var image = 'img/'+pin[3]+'.gif';
+            marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map,
                 icon: image,
-                title: beach[0],
+                title: pin[0],
+                html: 'name: '+pin[0]
+            });
+
+            google.maps.event.addListener(marker, 'click', function(marker, i) {
+                  infowindow.setContent(this.html);
+                  infowindow.open(map, this);
             });
         }
       }
