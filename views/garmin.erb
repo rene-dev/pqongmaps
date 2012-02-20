@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Garmin</title>
+</head>
+<style type="text/css" media="all">@import "/css/communicator.css";</style>
+<script src="http://maps.google.com/maps?file=api&v=2.x&key=" type="text/javascript">&#160;</script>
+<script type="text/javascript" src="http://developer.garmin.com/web/communicator-api/prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="http://developer.garmin.com/web/communicator-api/garmin/device/GarminDeviceDisplay.js">&#160;</script>
+<script type="text/javascript">	
+	function load() {
+	    var display = new Garmin.DeviceDisplay("garminDisplay", { 
+			pathKeyPairsArray: ["",""],
+			showReadDataElement: true,
+			showReadGoogleMap: true,
+			showProgressBar: true,
+			showReadTracksSelect: true,
+			showReadWaypointsSelect: true,
+			showFindDevicesElement: true,
+			autoFindDevices: true
+		});
+	}
+</script>
+
+<body onload="load()">
+
+<div id="garminDisplay"/>
+
+</body>
+</html>

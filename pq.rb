@@ -49,3 +49,7 @@ get '/' do
     "Pocket Query existiert nicht, oder ist nicht lesbar."
   end
 end
+
+get '/garmin' do
+    erb :garmin
+end
