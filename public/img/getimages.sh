@@ -6,3 +6,4 @@ wget http://www.geocaching.com/images/WptTypes/sm/5.gif
 wget http://www.geocaching.com/images/WptTypes/sm/6.gif
 wget http://www.geocaching.com/images/WptTypes/sm/7.gif
 wget http://www.geocaching.com/images/WptTypes/sm/8.gif
+wget http://www.buckeyetraffic.org/images/iconsAndPins/blue_circle.gif
