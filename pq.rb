@@ -1,3 +1,4 @@
+#! /usr/bin/env ruby
 require 'sinatra'
 require 'nokogiri'
 require 'json'
@@ -29,9 +30,21 @@ get '/pins.json' do
 end
 
 get '/' do
+  if File.exists?('pq.gpx')
+    wpts = Array.new
+    gpx = Nokogiri::XML(File.open('pq.gpx'))
+    lat = (gpx.css('bounds')[0].values[0].to_f+gpx.css('bounds')[0].values[2].to_f)/2
+    lon = (gpx.css('bounds')[0].values[1].to_f+gpx.css('bounds')[0].values[3].to_f)/2
+
+    gpx.css('wpt').each do |wpt|
+      wpts.push([wpt.css('urlname').inner_text,wpt.values[0],wpt.values[1],parse_type(wpt.css('type').inner_text)])
+    end
     @apikey = ''
     @lat = lat.to_s
     @lon = lon.to_s
     @pins = wpts.to_json
     erb :index
+  else
+    "Pocket Query existiert nicht, oder ist nicht lesbar."
+  end
 end

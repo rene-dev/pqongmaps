@@ -67,7 +67,58 @@
 
         // In the ajax callback delete the current markers and add new markers
       }
-      }
+      //}
+        
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(
+					  function (position) {
+							var posLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+							var image = 'img/blue_circle.gif';
+							marker = new google.maps.Marker({
+							  position: posLatLng,
+							  map: map,
+							  icon: image,
+							  title: 'Geolocation',
+							  html: 'name: Geolocation'
+							});
+							google.maps.event.addListener(marker, 'click', function(marker, i) {
+                  infowindow.setContent(this.html);
+                  infowindow.open(map, this);
+                });
+						},
+						function () {
+							var posLatLng = new google.maps.LatLng(59.3325215, 18.0643818);
+							var image = 'img/blue_circle.gif';
+							marker = new google.maps.Marker({
+							  position: posLatLng,
+							  map: map,
+							  icon: image,
+							  title: 'Please accept geolocation for me to be able to find you.',
+							  html: 'name: LocNotFound'
+							});
+							google.maps.event.addListener(marker, 'click', function(marker, i) {
+                  infowindow.setContent(this.html);
+                  infowindow.open(map, this);
+                });
+						}
+					);
+				}
+				else {
+					var posLatLng = new google.maps.LatLng(-27.121192, -109.366424);
+							var image = 'img/blue_circle.gif';
+							marker = new google.maps.Marker({
+							  position: posLatLng,
+							  map: map,
+							  icon: image,
+							  title: 'No location support. Try Easter Island for now.',
+							  html: 'name: NoLocSupport'
+							});
+				      google.maps.event.addListener(marker, 'click', function(marker, i) {
+                  infowindow.setContent(this.html);
+                  infowindow.open(map, this);
+                });
+            }
+          }
     </script>
   </head>
   <body onload="initialize()">

@@ -2,3 +2,5 @@
 config.yaml
 *.gpx
 *.gif
+*~
+*.swp
