@@ -22,6 +22,12 @@ gpx.css('wpt').each do |wpt|
     wpts.push([wpt.css('urlname').inner_text,wpt.values[0],wpt.values[1],parse_type(wpt.css('type').inner_text)])
 end
 
+get '/pins.json' do
+    logger.info 'pins updated'
+    #content_type :json
+    #{ :key1 => 'value1', :key2 => 'value2' }.to_json
+end
+
 get '/' do
     @apikey = ''
     @lat = lat.to_s

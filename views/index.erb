@@ -7,8 +7,8 @@
       body { height: 100%; margin: 0; padding: 0 }
       #map_canvas { height: 100% }
     </style>
-    <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=<%= @apikey %>&sensor=false">
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<%= @apikey %>&sensor=false">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     </script>
     <script type="text/javascript">
       function initialize() {
@@ -18,6 +18,7 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+        google.maps.event.addListener(map, 'idle', showMarkers);
         var infowindow = new google.maps.InfoWindow();
         var marker,i;
         var markers = <%= @pins %>;
@@ -38,6 +39,34 @@
                   infowindow.open(map, this);
             });
         }
+      
+      function showMarkers() {
+        var bounds = map.getBounds();
+        var southWest = bounds.getSouthWest();
+        var northEast = bounds.getNorthEast();
+        var lat1 = northEast.lat();
+        var lon1 = northEast.lng();
+        var lat2 = southWest.lat();
+        var lon2 = southWest.lng();
+        //alert("map moved"+lat1+lon1);
+        // Call you server with ajax passing it the bounds
+        //$.getJSON("/pins.json?json=?",
+        //{
+        //tags: "cat",
+        //tagmode: "any",
+        //format: "json"
+        //},
+        //function(data) {
+        
+        //$.each(data.items, function(i,item){
+        //$("<img/>").attr("src", item.media.m).appendTo("#images");
+        //if ( i == 3 ) return false;
+        //});
+
+        //});
+
+        // In the ajax callback delete the current markers and add new markers
+      }
       }
     </script>
   </head>
