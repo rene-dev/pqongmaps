@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
+      // Scale the mapview
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
       #map_canvas { height: 100% }
@@ -59,9 +60,9 @@
         // In the ajax callback delete the current markers and add new markers
       }
         
-				if (navigator.geolocation) {
+				if (navigator.geolocation) { // If the browser can geolocate the user...
 					navigator.geolocation.getCurrentPosition(
-					  function (position) {
+					  function (position) { // ...and the user allows it...
 							var posLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 							var image = 'img/blue_circle.gif';
 							marker = new google.maps.Marker({
@@ -71,7 +72,7 @@
 							  title: 'Geolocation',
 							  html: 'name: Geolocation'
 							});
-							google.maps.event.addListener(marker, 'click', function(marker, i) {
+							google.maps.event.addListener(marker, 'click', function(marker, i) { // ...set a marker to user's position.
                   infowindow.setContent(this.html);
                   infowindow.open(map, this);
                 });
@@ -88,7 +89,7 @@
 							});
 							google.maps.event.addListener(marker, 'click', function(marker, i) {
                   infowindow.setContent(this.html);
-                  infowindow.open(map, this);
+                  infowindow.open(map, this); // ...else pin the location marker to stockholm.
                 });
 						}
 					);
@@ -105,7 +106,7 @@
 							});
 				      google.maps.event.addListener(marker, 'click', function(marker, i) {
                   infowindow.setContent(this.html);
-                  infowindow.open(map, this);
+                  infowindow.open(map, this); // When using a dumb browser, pin the user to easter island.
                 });
             }
           }

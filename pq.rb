@@ -1,9 +1,10 @@
 #! /usr/bin/env ruby
+# Import gems for Sinatra, XML-parsing and json stuff
 require 'sinatra'
 require 'nokogiri'
 require 'json'
 
-def parse_type(type)
+def parse_type(type) # Parse the type of the cache for proper image displaying
     type_no = case type
         when 'Geocache|Unknown Cache' then 8
         when 'Geocache|Traditional Cache' then 2
@@ -12,15 +13,6 @@ def parse_type(type)
         else 8
     end
     return type_no
-end
-
-wpts = Array.new
-gpx = Nokogiri::XML(File.open('pq.gpx'))
-lat = (gpx.css('bounds')[0].values[0].to_f+gpx.css('bounds')[0].values[2].to_f)/2
-lon = (gpx.css('bounds')[0].values[1].to_f+gpx.css('bounds')[0].values[3].to_f)/2
-
-gpx.css('wpt').each do |wpt|
-    wpts.push([wpt.css('urlname').inner_text,wpt.values[0],wpt.values[1],parse_type(wpt.css('type').inner_text)])
 end
 
 get '/pins.json' do
@@ -32,24 +24,24 @@ get '/pins.json' do
 end
 
 get '/' do
-  if File.exists?('pq.gpx')
+  if File.exists?('pq.gpx') # If the gpx is available
     wpts = Array.new
-    gpx = Nokogiri::XML(File.open('pq.gpx'))
-    lat = (gpx.css('bounds')[0].values[0].to_f+gpx.css('bounds')[0].values[2].to_f)/2
+    gpx = Nokogiri::XML(File.open('pq.gpx')) # Open the gpx
+    lat = (gpx.css('bounds')[0].values[0].to_f+gpx.css('bounds')[0].values[2].to_f)/2 # And parse it into the coordinates...
     lon = (gpx.css('bounds')[0].values[1].to_f+gpx.css('bounds')[0].values[3].to_f)/2
 
     gpx.css('wpt').each do |wpt|
-      wpts.push([wpt.css('urlname').inner_text,wpt.values[0],wpt.values[1],parse_type(wpt.css('type').inner_text)])
+      wpts.push([wpt.css('urlname').inner_text,wpt.values[0],wpt.values[1],parse_type(wpt.css('type').inner_text)]) # ...and the waypoint array
     end
-    @apikey = ''
-    @lat = lat.to_s
+    @apikey = '' # Define the GMaps Api key
+    @lat = lat.to_s # Export the coordinates
     @lon = lon.to_s
-    erb :index
+    erb :index # Call the view
   else
-    "Pocket Query existiert nicht, oder ist nicht lesbar."
+    "Pocket Query existiert nicht, oder ist nicht lesbar." # Else fail
   end
 end
 
 get '/garmin' do
-    erb :garmin
+    erb :garmin # Call the garmin view
 end
