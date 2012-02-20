@@ -24,9 +24,11 @@ gpx.css('wpt').each do |wpt|
 end
 
 get '/pins.json' do
-    logger.info 'pins updated'
-    #content_type :json
-    #{ :key1 => 'value1', :key2 => 'value2' }.to_json
+    content_type :json
+    logger.info params['lat1']
+    logger.info params['lon1']
+    #dont care, just return ALL the markers
+    wpts.to_json
 end
 
 get '/' do
@@ -42,7 +44,6 @@ get '/' do
     @apikey = ''
     @lat = lat.to_s
     @lon = lon.to_s
-    @pins = wpts.to_json
     erb :index
   else
     "Pocket Query existiert nicht, oder ist nicht lesbar."
