@@ -1,4 +1,4 @@
-!/bin/sh
+#!/bin/sh
 wget http://www.geocaching.com/images/WptTypes/sm/2.gif
 wget http://www.geocaching.com/images/WptTypes/sm/3.gif
 wget http://www.geocaching.com/images/WptTypes/sm/4.gif
