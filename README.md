@@ -1,14 +1,14 @@
 PQonGmaps
 =======
 
-When groundspeak stopped supporting google maps, I hacked this script to parse gpx files
-and display then using the google maps API.
+When Groundspeak stopped supporting Google Maps, I hacked this script to parse GPX files
+and display then using the Google Maps API.
 It started as a personal project, but perhaps someone wants to use (or even contribute) to it...
 
 Installation
 ------------
 
-`git@github.com:rene-dev/pqongmaps.git`
+`git clone git@github.com:rene-dev/pqongmaps.git`
 
 `rake db:migrate`
 
