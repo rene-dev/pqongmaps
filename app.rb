@@ -1,10 +1,9 @@
 #! /usr/bin/env ruby
 # Import gems for Sinatra, XML-parsing and json stuff
-require 'sinatra'
-require 'sinatra/activerecord'
-require 'nokogiri'
+require 'rubygems'
+require 'bundler'
+Bundler.require
 require 'json'
-require 'haml'
 
 class Cache < ActiveRecord::Base
     def self.in_area(lat1,lon1,lat2,lon2)

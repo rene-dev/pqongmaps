@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 gem "sinatra"
 gem "nokogiri"
-gem "sinatra_more"
-gem "sinatra-activerecord"
+gem "sinatra-activerecord", :require => "sinatra/activerecord"
 gem "sqlite3"
+gem "activerecord"
