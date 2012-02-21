@@ -12,6 +12,16 @@ class Cache < ActiveRecord::Base
 end
 
 class Pqongmaps < Sinatra::Base
+  
+  # Registering some plugins
+  register SinatraMore::RoutingPlugin
+  register SinatraMore::MarkupPlugin
+  
+  # Defining the routes
+  map(:upload).to("/upload")
+  map(:pins).to("/pins.json")
+  map(:garmin).to("/garmin")
+  
   def parse_type(type) # Parse the type of the cache for proper image displaying
     type_no = case type
     when 'Geocache|Unknown Cache' then 8
@@ -25,19 +35,19 @@ class Pqongmaps < Sinatra::Base
 
   #every time the viewport of the map changes, a callback gets the pins
   #for the new viewport from this json file.
-  get '/pins.json' do
+  get (:pins) do
     content_type :json
     #ask the database which caches are in the viewport, and return them as json
     Cache.select('name,lat,lon,gc_type').in_area(params['lat1'],params['lon1'],params['lat2'],params['lon2']).to_json
   end
 
   # Handle GET-request (Show the upload form)
-  get '/upload' do
+  get (:upload) do
     erb :upload
   end
 
   # Handle POST-request (Receive and save the uploaded file)
-  post "/upload" do
+  post (:upload) do
     #save file to uploads folder
     File.open('uploads/' + params['myfile'][:filename], "w") do |f|
       f.write(params['myfile'][:tempfile].read)
@@ -65,15 +75,15 @@ class Pqongmaps < Sinatra::Base
        end
     end
 
-    return "Importet #{new} caches, ignored #{old} duplicates"
-end
+    return "Imported #{new} caches, ignored #{old} duplicates"
+  end
 
   get '/' do
     @apikey = '' # Define the GMaps Api key
     erb :index # Call the view
   end
 
-  get '/garmin' do
+  get (:garmin) do
     erb :garmin # Call the garmin view
   end
 end
