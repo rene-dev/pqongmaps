@@ -12,8 +12,15 @@ Installation
 
 `rake db:migrate`
 
+`bundle install`
+
 Make sure the ruby has permissions to write into `uploads`
 
-`ruby -rubygems app.rb`
+`rackup`
 
 upload a gpx file on http://localhost:4567/upload
+
+Using as a FastCGI service via rackup
+--------------------------
+Specify your HOME in wrapper.fcgi. If you use RVM, edit the "Path to .rvmrc"-line in wrapper.fcgi to your actual path to the .rvmrc. (Usually the path in which you cloned this repo). If you do not use RVM, just comment this line.
+Point your browser to this path and enjoy. 
