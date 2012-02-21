@@ -33,7 +33,7 @@ end
 
 # Handle GET-request (Show the upload form)
 get '/upload' do
-    haml :upload
+    erb :upload
 end
 
 # Handle POST-request (Receive and save the uploaded file)
@@ -60,7 +60,7 @@ end
 
 get '/' do
     @apikey = '' # Define the GMaps Api key
-    haml :index # Call the view
+    erb :index # Call the view
 end
 
 get '/garmin' do
