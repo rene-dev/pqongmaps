@@ -57,7 +57,7 @@ end
 
 get '/' do
     @apikey = '' # Define the GMaps Api key
-    erb :index # Call the view
+    haml :index # Call the view
 end
 
 get '/garmin' do

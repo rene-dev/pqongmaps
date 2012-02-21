@@ -1,0 +1,14 @@
+%html
+  %head
+    %meta{:content => "initial-scale=1.0, user-scalable=no", :name => "viewport"}/
+    :css
+      /*Scale the mapview*/
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+        %title Caches
+    %script{:src => "http://code.jquery.com/jquery-latest.js"}
+    %script{:src => "http://maps.googleapis.com/maps/api/js?key=#{@apikey}&sensor=false", :type => "text/javascript"}
+    %script{:src => "/js/gmaps.js", :type => "text/javascript"}
+  %body{:onload => "initialize()"}
+    #map_canvas{:style => "width:100%; height:100%"}
