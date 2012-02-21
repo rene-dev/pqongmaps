@@ -1,6 +1,5 @@
 function initialize() {
     var myOptions = {
-        center: new google.maps.LatLng(51.48895, 7.424133),
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -63,6 +62,7 @@ function initialize() {
                 infowindow.setContent(this.html);
                 infowindow.open(map, this);
             });
+			google.maps.setCenter(posLatLng);
         }, function () {
             var posLatLng = new google.maps.LatLng(59.3325215, 18.0643818);
             var image = 'img/blue_circle.gif';
@@ -77,6 +77,7 @@ function initialize() {
                 infowindow.setContent(this.html);
                 infowindow.open(map, this); // ...else pin the location marker to stockholm.
             });
+			google.maps.setCenter(posLatLng);
         });
     } else {
         var posLatLng = new google.maps.LatLng(-27.121192, -109.366424);
@@ -92,5 +93,6 @@ function initialize() {
             infowindow.setContent(this.html);
             infowindow.open(map, this); // When using a dumb browser, pin the user to easter island.
         });
+		google.maps.setCenter(posLatLng);
     }
 }
