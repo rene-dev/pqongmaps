@@ -1,7 +1,7 @@
 function initialize() {
     var myOptions = {
-        center: new google.maps.LatLng(51.48895, 7.424133),
-        zoom: 15,
+		center: new google.maps.LatLng(51.48895, 7.424133),
+        zoom: 5,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -63,34 +63,8 @@ function initialize() {
                 infowindow.setContent(this.html);
                 infowindow.open(map, this);
             });
-        }, function () {
-            var posLatLng = new google.maps.LatLng(59.3325215, 18.0643818);
-            var image = 'img/blue_circle.gif';
-            marker = new google.maps.Marker({
-                position: posLatLng,
-                map: map,
-                icon: image,
-                title: 'Please accept geolocation for me to be able to find you.',
-                html: 'name: LocNotFound'
-            });
-            google.maps.event.addListener(marker, 'click', function (marker, i) {
-                infowindow.setContent(this.html);
-                infowindow.open(map, this); // ...else pin the location marker to stockholm.
-            });
-        });
-    } else {
-        var posLatLng = new google.maps.LatLng(-27.121192, -109.366424);
-        var image = 'img/blue_circle.gif';
-        marker = new google.maps.Marker({
-            position: posLatLng,
-            map: map,
-            icon: image,
-            title: 'No location support. Try Easter Island for now.',
-            html: 'name: NoLocSupport'
-        });
-        google.maps.event.addListener(marker, 'click', function (marker, i) {
-            infowindow.setContent(this.html);
-            infowindow.open(map, this); // When using a dumb browser, pin the user to easter island.
-        });
-    }
+			google.maps.setCenter(posLatLng);
+			google.maps.setZoom(13);
+        }, function () {});
+    } 
 }
