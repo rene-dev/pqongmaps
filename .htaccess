@@ -1,0 +1,10 @@
+Options +ExecCGI
+
+RewriteEngine On
+RewriteBase /
+
+DirectoryIndex wrapper.fcgi
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ wrapper.fcgi/$1 [L]

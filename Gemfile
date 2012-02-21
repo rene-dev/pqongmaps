@@ -1,5 +1,5 @@
 source "http://rubygems.org"
-gem "sinatra"
+gem "sinatra", :require => "sinatra/base"
 gem "nokogiri"
 gem "sinatra-activerecord", :require => "sinatra/activerecord"
 gem "sqlite3"
