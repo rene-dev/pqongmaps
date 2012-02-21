@@ -54,7 +54,9 @@ post "/upload" do
                    :gccode => wpt.css('name').inner_text,
                    :lat  => wpt.values[0],
                    :lon  => wpt.values[1],
-                   :gc_type => parse_type(wpt.css('type').inner_text).to_i)
+                   :gc_type => parse_type(wpt.css('type').inner_text).to_i,
+                   :terrain => wpt.css('groundspeak:cache').css('groundspeak:difficulty').inner_text.to_i,
+                   :difficulty => wpt.css('groundspeak:cache').css('groundspeak:terrain').inner_text.to_i)
        if cache.persisted? #skip if already in db
         old = old+1
        else
