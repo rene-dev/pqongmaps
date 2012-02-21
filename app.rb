@@ -7,6 +7,9 @@ require 'json'
 require 'haml'
 
 class Cache < ActiveRecord::Base
+    def self.in_area(lat1,lon1,lat2,lon2)
+        where("lat > #{lat2} and lat < #{lat1} and lon > #{lon2} and lon < #{lon1}")
+    end
 end
 
 def parse_type(type) # Parse the type of the cache for proper image displaying
@@ -25,7 +28,7 @@ end
 get '/pins.json' do
     content_type :json
     #ask the database which caches are in the viewport, and return them as json
-    Cache.select('name,lat,lon,gc_type').where("lat > #{params['lat2']} and lat < #{params['lat1']} and lon > #{params['lon2']} and lon < #{params['lon1']}").to_json
+    Cache.select('name,lat,lon,gc_type').in_area(params['lat1'],params['lon1'],params['lat2'],params['lon2']).to_json
 end
 
 # Handle GET-request (Show the upload form)
