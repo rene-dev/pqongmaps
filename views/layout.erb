@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title><%= @title %></title>
+    <%= erb :'partials/stylesheets'%>
+  </head>
+  <body>
+    <div class="container">
+      <%= erb :'partials/header' %>
+      <section class="round">
+      <%= yield %>
+      </section>
+      <%= erb :'partials/footer' %>
+    </div>
+  </body>
+</html>
