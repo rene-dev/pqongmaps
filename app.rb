@@ -3,7 +3,6 @@
 require 'rubygems'
 require 'bundler'
 Bundler.require
-require 'json'
 
 class Cache < ActiveRecord::Base
     def self.in_area(lat1,lon1,lat2,lon2)
