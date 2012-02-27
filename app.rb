@@ -18,6 +18,7 @@ class Pqongmaps < Sinatra::Base
   register SinatraMore::MarkupPlugin
   
   # Defining the routes
+  map(:home).to("/")
   map(:upload).to("/upload")
   map(:pins).to("/pins.json")
   map(:garmin).to("/garmin")
